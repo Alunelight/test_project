@@ -7,7 +7,7 @@ PDF文件重命名脚本
 import re
 import argparse
 from pathlib import Path
-from typing import Dict, Tuple, Optional
+from typing import Dict, Tuple, Optional, Literal
 import pandas as pd
 
 
@@ -32,7 +32,7 @@ def read_excel_mapping(excel_path: Path) -> Dict[str, Tuple[str, str]]:
         # 根据文件扩展名选择首选引擎
         file_ext = excel_path.suffix.lower()
         if file_ext == '.xls':
-            preferred_engines = ['xlrd', 'openpyxl']  # .xls扩展名，但可能是xlsx格式
+            preferred_engines: list[Literal['xlrd', 'openpyxl']] = ['xlrd', 'openpyxl']  # .xls扩展名，但可能是xlsx格式
         elif file_ext in ['.xlsx', '.xlsm']:
             preferred_engines = ['openpyxl', 'xlrd']
         else:
@@ -214,7 +214,7 @@ def rename_pdf_files(target_dir: Path, excel_filename: str = "协商解除函签
     
     # 输出统计信息
     print("=" * 80)
-    print(f"\n处理完成！")
+    print("\n处理完成！")
     print(f"总计: {len(pdf_files)} 个文件")
     print(f"成功重命名: {success_count} 个")
     print(f"未匹配/失败: {failed_count} 个")
