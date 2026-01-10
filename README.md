@@ -13,6 +13,7 @@
 ## 环境要求
 
 - Python >= 3.13
+- [uv](https://github.com/astral-sh/uv) - Python 包管理器（推荐）
 - 依赖包：
 
   - pandas >= 2.0.0
@@ -26,6 +27,21 @@
 
 ```bash
 uv sync
+```
+
+## 代码质量检查
+
+项目使用 `ruff` 进行代码质量检查和格式化：
+
+```bash
+# 检查代码质量
+uv tool run ruff check .
+
+# 检查代码格式
+uv tool run ruff format --check .
+
+# 自动修复格式问题
+uv tool run ruff format .
 ```
 
 ## 脚本说明
@@ -170,12 +186,31 @@ uv run python match_pdfs_by_name.py /path/to/pdfs /path/to/excel.xlsx --output-d
 - 每个文件的处理状态
 - 统计信息（总数、成功、失败、错误）
 
+## 开发说明
+
+### 代码规范
+
+- 项目使用 `ruff` 进行代码检查和格式化
+- 所有代码已通过 `ruff check` 检查
+- 代码格式符合 `ruff format` 标准
+
+### 运行测试
+
+```bash
+# 代码质量检查
+uv tool run ruff check .
+
+# 代码格式检查
+uv tool run ruff format --check .
+```
+
 ## 注意事项
 
 1. **文件备份**：所有脚本在修改Excel文件前会自动创建备份
 2. **文件格式**：`.xls` 格式的文件在保存时可能会转换为 `.xlsx` 格式
 3. **文件移动**：`match_pdfs_by_name.py` 使用移动操作，匹配的文件会从原文件夹移除
 4. **文件复制**：`match_pdfs.py` 使用复制操作，原文件会保留
+5. **代码质量**：项目已通过 ruff 代码检查，建议在提交代码前运行 `ruff check` 和 `ruff format`
 
 ## 许可证
 
